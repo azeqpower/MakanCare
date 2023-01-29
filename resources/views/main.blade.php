@@ -240,13 +240,11 @@
     <!-- ======= Team Section ======= -->
     <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
-
         <div class="section-title">
           <h2>Team</h2>
         </div>
-
         <div class="row">
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
                 <img src="TemplatePresento/assets/img/team/team-1.jpg" class="img-fluid" alt="">
@@ -257,8 +255,7 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="200">
               <div class="member-img">
                 <img src="TemplatePresento/assets/img/team/team-2.jpeg" class="img-fluid" alt="">
@@ -269,8 +266,7 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="300">
               <div class="member-img">
                 <img src="TemplatePresento/assets/img/team/team-3.jpeg" class="img-fluid" alt="">
@@ -283,7 +279,8 @@
           </div>
         </div>
       </div>
-    </section><!-- End Team Section -->
+    </section>
+    <!-- End Team Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
