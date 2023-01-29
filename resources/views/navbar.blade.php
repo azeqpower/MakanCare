@@ -69,26 +69,25 @@
                             >
                         </li>
                         @endcan
+                        <a class="nav-link scrollto" href="{{ route('foodbank.create-foodbank') }}">Create FoodBank</a>
                 
                                         <li class="dropdown"><a href="#"><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                            
-                            <li class="dropdown"><a href="#"><span>Your Food</span> <i class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                <li><a href="#">Edit Food</a></li>
+                                        <ul>
+                    @if(!Auth::user()->is_admin)
+                            <li class="dropdown"><a href="/view-donation"><span>Your Donation</span> </a>
+                                <!-- <ul>
                                 <li><a href="#">Delete Food</a></li>
-                                </ul>
+                                </ul> -->
+                                @endif
                                 <li><a href="#" onclick="logout()">Logout</a>
                                                     <script>
                                                         function logout() {
                                                         // add extra functionality or validation here
                                                             // then submit the form
                                                             document.getElementById('logout-form').submit();
-                                                                            }
-                                                                            
-                                                    </script>
-                                                
-                                                </a></li>
+                                                        }            
+                                                    </script></a>
+                                </li>
                             </li>
                             </ul>
                         </li>

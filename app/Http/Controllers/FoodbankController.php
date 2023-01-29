@@ -62,6 +62,20 @@ class FoodbankController extends Controller
 
     }
 
+    public function destroy()
+{
+    $marker = Report::where('status', 'solved')->first();
+
+    if ($marker->count() > 0) {
+        Report::where('status', 'solved')->delete();
+        session()->flash('status','Report History Cleared Successfully');
+        return redirect()->back();
+    } else {
+        session()->flash('status','Report is not Solved');
+        return redirect()->back();
+    }
+}
+
     public function index()
     {
         // retrieve all pending foodbank requests for admin review

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Marker;
+use App\Models\Food;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class MapController extends Controller
 {
@@ -96,12 +98,21 @@ class MapController extends Controller
 
     public function destroy($id)
     {
-        $student = Marker::find($id);
-    
-        $student->delete();
-        session()->flash('status','Marker Deleted Successfully');
+        $marker = Marker::find($id);
+        $foods = Food::where('location_id', $marker->id)->get();
+        foreach ($foods as $food) {
+            $destination='public/storage/image/'.$food->image;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+        }
+        Food::destroy($foods->pluck('id')->toArray());
+        $marker->delete();
+        session()->flash('status','Marker and related foods Deleted Successfully');
         return redirect()->back();
     }
+    
 
 
     

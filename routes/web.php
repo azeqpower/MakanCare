@@ -48,6 +48,8 @@ Route::get('/googleMaps', [MapController::class, 'show']);
 
 Route::get('/marker/{id}', [ FoodController::class, 'marker' ] );
 
+Route::get('/view-donation', [ FoodController::class, 'yourfood' ] );
+
 Route::get('/image/{id}', [FoodController::class, 'imageForm']);
 
 Route::post('/image/{id}', [ FoodController::class, 'store' ] );
@@ -108,5 +110,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/foodbank-requests/{id}/approve', [FoodbankController::class, 'approve'])->name('foodbank.approve');
     Route::post('/admin/foodbank-requests/{id}/reject', [FoodbankController::class, 'reject'])->name('foodbank.reject');
     Route::post('/admin/foodbank-report/{id}/solve', [FoodbankController::class, 'solve'])->name('foodbank.solve');
+    Route::delete('/admin/history-report/delete', [FoodbankController::class, 'destroy'])->name('foodbank.delete');
 });
 

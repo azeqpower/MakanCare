@@ -138,6 +138,14 @@ return view('image', compact('category','location','current_user_id'));
     }
 
 
+    public function yourfood(){
+    
+        $current_user_id = Auth::user()->id;
+        $foods = Food::where('user_id', $current_user_id)->get();
+        return view('view-donation', compact('foods'));
+
+    }
+
 
 
 

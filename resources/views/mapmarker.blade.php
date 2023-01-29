@@ -26,13 +26,11 @@
 
                 <thead>
 
-                    <th width="80px">Id</th>
-
-                    <th>Title</th>
+                    <th width="100px">Id</th>
                     <th width="120px">latitude</th>
                     <th width="120px">longitude</th>
 
-                    <th width="150px">Action</th>
+                    <th width="120px">Action</th>
 
                 </thead>
 
@@ -43,8 +41,6 @@
                 <tr>
 
                     <td>{{ $post->id }}</td>
-
-                    <td>{{ $post->title }}</td>
                     <td>{{ $post->latitude }}</td>
                     <td>{{ $post->longitude }}</td>
 

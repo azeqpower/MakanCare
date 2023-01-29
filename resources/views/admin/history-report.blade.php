@@ -18,7 +18,12 @@
 
             <h1>Report History</h1>
 
-            <a href="{{ url('/cmarker') }}" class="btn btn-success" style="float: right; margin-bottom: 20px;">Clear History</a>
+            <form action="{{ route('foodbank.delete') }}" method="POST">
+  @csrf
+  @method('DELETE')
+  <button type="submit" class="btn btn-success" style="float: right; margin-bottom: 20px;">Clear History</button>
+</form>
+
         
 
 

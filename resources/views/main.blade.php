@@ -66,12 +66,12 @@
                         </li>
                         <li class="dropdown"><a href="#"><span>{{ Auth::user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                            
-                            <li class="dropdown"><a href="#"><span>Your Food</span> <i class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                <li><a href="#">Edit Food</a></li>
+                    @if(!Auth::user()->is_admin)
+                            <li class="dropdown"><a href="/view-donation"><span>Your Donation</span> </a>
+                                <!-- <ul>
                                 <li><a href="#">Delete Food</a></li>
-                                </ul>
+                                </ul> -->
+                                @endif
                                 <li><a href="#" onclick="logout()">Logout</a>
                                                     <script>
                                                         function logout() {
