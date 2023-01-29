@@ -16,7 +16,7 @@
 
         <div class="col-md-12">
 
-            <h1>History Request</h1>
+            <h1>Report History</h1>
 
             <a href="{{ url('/cmarker') }}" class="btn btn-success" style="float: right; margin-bottom: 20px;">Clear History</a>
         
@@ -26,12 +26,11 @@
 
                 <thead>
 
-                    <th width="80px">Request ID</th>
+                    <th width="80px">Report ID</th>
 
-                    <th>Name</th>
+                    <th>Foodbank ID</th>
                     <th>Email</th>
                     <th>Desc.</th>
-                    <th width="120px">latitude, longitude</th>
                     <th width="200px">Status</th>
 
                 </thead>
@@ -44,18 +43,16 @@
 
                     <td>{{ $post->id }}</td>
 
-                    <td>{{ $post->name }}</td>
+                    <td>{{ $post->marker_id }}</td>
                     <td>{{ $post->email }}</td>
                     <td>{{ $post->description }}</td>
-                    <td>{{ $post->latitude }},{{ $post->longitude }}</td>
 
                     <td>
 
                    
-                                    @if($post->status === 'approved')
-                    <button class="btn btn-success" disabled>APPROVED</button>
-                @else($post->status === 'rejected')
-                    <button class="btn btn-danger" disabled>REJECTED</button>
+                                    @if($post->status === 'solved')
+                    <button class="btn btn-success" disabled>SOLVED</button>
+
         
                     </form>
                 @endif

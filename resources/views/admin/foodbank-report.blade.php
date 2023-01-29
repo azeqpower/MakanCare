@@ -16,9 +16,9 @@
 
         <div class="col-md-12">
 
-            <h1>History Request</h1>
+            <h1>Manage Report</h1>
 
-            <a href="{{ url('/cmarker') }}" class="btn btn-success" style="float: right; margin-bottom: 20px;">Clear History</a>
+            <a href="{{ url('/admin/history-report') }}" class="btn btn-success" style="float: right; margin-bottom: 20px;">View History</a>
         
 
 
@@ -26,13 +26,13 @@
 
                 <thead>
 
-                    <th width="80px">Request ID</th>
+                    <th width="80px">Report ID</th>
 
-                    <th>Name</th>
+                    <th>Marker</th>
                     <th>Email</th>
                     <th>Desc.</th>
-                    <th width="120px">latitude, longitude</th>
-                    <th width="200px">Status</th>
+                    <th width="100px">Status</th>
+                    <th width="200px">Action</th>
 
                 </thead>
 
@@ -44,24 +44,29 @@
 
                     <td>{{ $post->id }}</td>
 
-                    <td>{{ $post->name }}</td>
+                    <td>{{ $post->marker_id }}</td>
                     <td>{{ $post->email }}</td>
                     <td>{{ $post->description }}</td>
-                    <td>{{ $post->latitude }},{{ $post->longitude }}</td>
+                    <td>{{ $post->status }}</td>
 
                     <td>
 
-                   
+                    <div class="button-container">
                                     @if($post->status === 'approved')
-                    <button class="btn btn-success" disabled>APPROVED</button>
-                @else($post->status === 'rejected')
-                    <button class="btn btn-danger" disabled>REJECTED</button>
-        
+                    <button class="btn btn-success" disabled>SOLVED</button>
+                @else
+                    <form action="{{ route('foodbank.solve', $post->id) }}" method="POST">
+                        @csrf
+                        <button class="btn btn-success">SOLVE</button>
                     </form>
-                @endif
     
+                @endif
+                </div>
             
-       
+                       <style>.button-container {
+    display: flex;
+    justify-content: space-between;
+}</style>
                         
                     </td>
     

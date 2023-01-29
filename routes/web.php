@@ -73,7 +73,8 @@ Route::get('foodbank.create-foodbank', [FoodbankController::class, 'create'])->n
 
 Route::post('foodbank.create-foodbank', [ FoodbankController::class, 'store' ] );
 
-Route::post('/report', [FoodbankController::class, 'report']);
+Route::post('report', [FoodbankController::class, 'report'])->name('submit.report');
+
 
 
 /* Route to display notice that user should verify email first before can proceed*/
@@ -100,8 +101,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('admin', [AdminController::class, 'index']);
     Route::get('/admin/foodbank-requests', [FoodbankController::class, 'index']);
     Route::get('/admin/history-request', [FoodbankController::class, 'index2']);
+    Route::get('/admin/foodbank-report', [FoodbankController::class, 'index3']);
+    Route::get('/admin/history-report', [FoodbankController::class, 'index4']);
+    
 
     Route::post('/admin/foodbank-requests/{id}/approve', [FoodbankController::class, 'approve'])->name('foodbank.approve');
     Route::post('/admin/foodbank-requests/{id}/reject', [FoodbankController::class, 'reject'])->name('foodbank.reject');
+    Route::post('/admin/foodbank-report/{id}/solve', [FoodbankController::class, 'solve'])->name('foodbank.solve');
 });
 

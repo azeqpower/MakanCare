@@ -142,6 +142,7 @@
         @can('isAdmin')
         <h2><a href="{{ url('/mapmarker') }}" class="btn btn-primary">Manage Marker</a></h2>
         <h2><a href="{{ url('/admin/foodbank-requests') }}" class="btn btn-primary">Manage Request</a></h2>
+        <h2><a href="{{ url('/admin/foodbank-report') }}" class="btn btn-primary">View Report</a></h2>
     @endcan
 
     <div id='map'></div>

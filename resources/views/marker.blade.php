@@ -7,6 +7,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+
 
 </head>
 
@@ -14,6 +16,10 @@
 
 <a class="btn btn-dark mb-3" href="{{ url('/image/'.$student->id)}}">Add Food</a>
 <a href="{{ url('/googleMaps') }}" class="btn btn-primary">Back</a>
+<a><button type="button" class="btn btn-danger float-right mt-2" data-toggle="modal" data-target="#exampleModal" >
+  <i class="fas fa-flag"></i>
+</button> </a>
+
 
 <div class="card-columns">
     @foreach($foods as $food)
@@ -51,64 +57,118 @@
 
 
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+
+
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Report this Foodbank</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetRadioButtons()">
+  <span aria-hidden="true">&times;</span>
+</button>
+        
         </button>
       </div>
       <div class="modal-body">
-        <form>
+
+      <form action="{{ url('report') }}" method="POST">
         
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Select Report Category:</label>
-            @foreach($category as $category)
-            <ul>
-              <li><input type="radio" name="category_id" value="{{ $category->id }}">{{ $category->name }}</li>
-            </ul>
-            @endforeach
+  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <div class="step-1">
+            <label for="category-list" class="col-form-label">Select a category:</label>
+            <ul id="category-list">
+    @foreach($category as $category)
+        <li><input type="radio" name="categories_id" value="{{ $category->id }}" class="categories_id" required>{{ $category->name }}</li>
+    @endforeach
+</ul>
+
+            <button id="next-step-1" type="button" class="btn btn-secondary">Next</button>
           </div>
-          <div class="form-group">
-            <label for="message-text" class="col-form-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+          <div class="step-2" style="display:none;">
+            <input type="hidden" name="user_id" value="{{$current_user_id}}">
+            <input type="hidden" name="marker_id" value="{{$student->id}}"> 
+            <input type="text" name="description" required class="form-control">
+            <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
+    
     </div>
   </div>
 </div>
 
 
+
 <script>
-    $(document).ready(function() {
-        $("#report-button").click(function(event) {
-            event.preventDefault();
-            $('#report-form').show();
+
+
+    var categorySelected = false;
+
+    $(document).ready(function(){
+        $("input[name='categories_id']").click(function(){
+            categorySelected = true;
         });
-        $("#report-form").submit(function(event) {
-            event.preventDefault();
-            var formData = $(this).serialize();
-            $.ajax({
-                url: '/report',
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    alert("Form submitted!");
-                    $('#report-form').hide();
-                }
-            });
+
+        $("#next-step-1").click(function(){
+            if (!categorySelected) {
+                alert("Please select a category before proceeding.");
+            } else {
+                $(".step-1").hide();
+                $(".step-2").show();
+                categorySelected = false;
+            }
         });
+
+      
+
     });
+
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    var formData = new FormData(event.target);
+    // Use the `fetch` function to submit the form data to the server via a POST request
+    fetch("https://reportruz.test/marker/1", {
+      method: "POST",
+      body: formData
+    })
+    .then(function(response) {
+      // Handle the response from the server
+    })
+    .catch(function(error) {
+      // Handle any errors
+    });
+  });
+    
+    
+    $('#exampleModal').on('hidden.bs.modal', function (e) {
+    resetRadioButtons()
+    categorySelected = false;
+      $(this)
+        .find("input,textarea,select")
+           .val('')
+           .end()
+        .find(".step-2")
+           .hide()
+           .end()
+        .find(".step-1")
+           .show()
+           .end();
+    })
+
+function resetRadioButtons() {
+  var radioButtons = document.getElementsByName("category_id");
+  for(var i = 0; i < radioButtons.length; i++) {
+    radioButtons[i].checked = false;
+  }
+}
+
 </script>
+
+
+
 
 
 

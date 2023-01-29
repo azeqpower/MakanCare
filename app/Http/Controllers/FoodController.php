@@ -20,9 +20,10 @@ class FoodController extends Controller
         $student = Marker::find($id);
         // $food = Food::with('user')->find($id);
     $foods = Food::where('location_id', $id)->with('category','user')->get();
+    $current_user_id = Auth::id();
     $category = ReportCategory::all();
 
-        return view('marker', compact('foods','student','category'));
+        return view('marker', compact('foods','student','category','current_user_id'));
     }
 
     

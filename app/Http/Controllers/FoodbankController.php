@@ -7,6 +7,9 @@ use App\Models\FoodbankRequest;
 use App\Models\Report;
 use App\Models\Marker;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Csrf;
+
+
 
 
 class FoodbankController extends Controller
@@ -38,7 +41,7 @@ class FoodbankController extends Controller
         $foodbankRequest->description = $request->description;
         $foodbankRequest->status = 'pending'; // set the status to pending for admin review
         $foodbankRequest->save();
-
+       
         return redirect()->back()->with('status', 'Foodbank request submitted successfully. It will be reviewed by admin.');
     }
 
@@ -55,7 +58,8 @@ class FoodbankController extends Controller
         $ReportRequest->status = 'unsolved'; // set the status to pending for admin review
         $ReportRequest->save();
 
-        return response()->json(['success'=>'Form Submitted successfully']);
+        return redirect()->back()->with('status', 'Form submitted successfully!');
+
     }
 
     public function index()
@@ -78,6 +82,25 @@ class FoodbankController extends Controller
         return view('admin.history-request', compact('foodbankRequests'));
     }
 
+    public function index3()
+    {
+        // retrieve all pending foodbank requests for admin review
+        $foodbankRequests = Report::join('users', 'reports.user_id', '=', 'users.id')
+        ->select('reports.*', 'users.email')
+        ->where('reports.status', 'unsolved')
+        ->get();
+        return view('admin.foodbank-report', compact('foodbankRequests'));
+    }
+
+    public function index4()
+    {
+        // retrieve all pending foodbank requests for admin review
+        $foodbankRequests = Report::join('users', 'reports.user_id', '=', 'users.id')
+        ->select('reports.*', 'users.email')
+        ->whereIn('reports.status', ['solved'])
+        ->get();
+        return view('admin.history-report', compact('foodbankRequests'));
+    }
 
 
 
@@ -97,7 +120,7 @@ class FoodbankController extends Controller
         $marker->save();
 
         
-        session()->flash('status','Request Submitted. Subject to Admin Approval');
+        session()->flash('status','Request Approved, Foodbank has been created');
         return redirect()->back();
     
     }
@@ -110,5 +133,20 @@ class FoodbankController extends Controller
         $foodbankRequest->save();
 
         return redirect()->back()->with('status', 'Foodbank request rejected.');
+    }
+
+
+    public function solve($id)
+    {
+        // find the foodbank request and update its status to approved
+        $foodbankRequest = Report::find($id);
+        $foodbankRequest->status = 'solved';
+        $foodbankRequest->save();
+
+
+        
+        session()->flash('status','Report Solved');
+        return redirect()->back();
+    
     }
 }

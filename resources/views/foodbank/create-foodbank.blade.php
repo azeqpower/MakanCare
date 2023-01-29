@@ -140,9 +140,9 @@
 
 
 
-@if(session()->has('message'))
+@if(session()->has('status'))
     <div class="alert alert-success">
-        {{ session()->get('message') }}
+        {{ session()->get('status') }}
     </div>
 @endif
 @endsection
