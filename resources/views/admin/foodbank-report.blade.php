@@ -29,7 +29,7 @@
                     <th width="80px">Report ID</th>
 
                     <th>Marker</th>
-                    <th>Email</th>
+                    <th>Email, Phone</th>
                     <th>Desc.</th>
                     <th width="100px">Status</th>
                     <th width="200px">Action</th>
@@ -45,7 +45,7 @@
                     <td>{{ $post->id }}</td>
 
                     <td>{{ $post->marker_id }}</td>
-                    <td>{{ $post->email }}</td>
+                    <td>{{ $post->email }}, {{ $post->phone }}</td>
                     <td>{{ $post->description }}</td>
                     <td>{{ $post->status }}</td>
 

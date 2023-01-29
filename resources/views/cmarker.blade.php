@@ -19,11 +19,7 @@
                         @csrf
 
 
-                        <div class="mb-5">
-                            <label for="">Title</label>
-                            <input type="text" name="title" required class="form-control">
-                        </div>
-
+                    
                         <div id="map" style="height: 400px"></div>
 
                         <script>

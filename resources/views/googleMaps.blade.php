@@ -1,4 +1,4 @@
-@extends('layout.private') 
+@extends('layout.private')
 @include('navbar')
 @section('content')
 <!DOCTYPE html>
@@ -83,28 +83,7 @@
     @endif
 
        
-        <!-- Header-->
-        <!-- <header class="bg-primary bg-gradient text-white">
-            <div class="container px-4 text-center">
-                <h1 class="fw-bolder">ReportTruzz</h1>
-                <p class="lead">Report teruih pa bozz</p>
-            </div>
-        </header> -->
-        <!-- About section-->
-        <!-- <section class = "bg-light" id="about">
-            <div class="container px-4">
-                <div class="row gx-4 justify-content-center">
-                    <div class="col-lg-8">
-                        <h2>ReportTruzz</h2>
-                        <p class="lead"></p>
-                        <ul>
-                            <li></li>
-                        </ul>
-                        
-                    </div>
-                </div>
-            </div>
-        </section> -->
+     
         <!-- Services section-->
         <section class="bg-light" id="services">
            <script type="text/javascript">
@@ -142,37 +121,21 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
 
-<<<<<<< .mine
         <div class="container-fluid">
-        <h2>ReporTruzz map</h2>
-=======
-        <div class="container-flex mt-xl-5 ">
-        
->>>>>>> .theirs
+    
   <div class="container-flex mt-xl-5 ">
         
-        <!-- <div id='map' style='height: 95vh; width: 100%;'></div> -->
         
-        <div id="map" style="width: 100%; height: 100%;"></div><<<<<<< .mine
-        <h2><a href="{{ url('/cmarker') }}" class="btn btn-primary">Create Marker</a></h2>
-        @can('isAdmin')
-=======
+
+
         
         <div id="map" style="width: 100%; height: 100%;"></div>
->>>>>>> .theirs
-  @can('isAdmin')
-        <h2><a href="{{ url('/mapmarker') }}" class="btn btn-primary">Manage Marker</a></h2>
-        <h2><a href="{{ url('/admin/foodbank-requests') }}" class="btn btn-primary">Manage Request</a></h2>
-        <h2><a href="{{ url('/admin/foodbank-report') }}" class="btn btn-primary">View Report</a></h2>
-    @endcan<<<<<<< .mine
-        <h2><a href="{{ url('/admin/foodbank-requests') }}" class="btn btn-primary">Manage Request</a></h2>
-        <h2><a href="{{ url('/admin/foodbank-report') }}" class="btn btn-primary">View Report</a></h2>
-    @endcan
-=======
+
+
+   
 
 
 
->>>>>>> .theirs
 
 
 

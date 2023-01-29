@@ -84,9 +84,9 @@ class FoodbankController extends Controller
 
     public function index3()
     {
-        // retrieve all pending foodbank requests for admin review
+        // retrieve all report foodbank requests for admin review
         $foodbankRequests = Report::join('users', 'reports.user_id', '=', 'users.id')
-        ->select('reports.*', 'users.email')
+        ->select('reports.*', 'users.email','users.phone')
         ->where('reports.status', 'unsolved')
         ->get();
         return view('admin.foodbank-report', compact('foodbankRequests'));
@@ -94,9 +94,9 @@ class FoodbankController extends Controller
 
     public function index4()
     {
-        // retrieve all pending foodbank requests for admin review
+        // retrieve all pending report requests for admin review
         $foodbankRequests = Report::join('users', 'reports.user_id', '=', 'users.id')
-        ->select('reports.*', 'users.email')
+        ->select('reports.*', 'users.email','users.phone')
         ->whereIn('reports.status', ['solved'])
         ->get();
         return view('admin.history-report', compact('foodbankRequests'));

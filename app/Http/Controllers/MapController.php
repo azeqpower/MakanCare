@@ -50,7 +50,7 @@ class MapController extends Controller
         public function store(Request $request)
     {
         $student = new Marker;
-        $student->title = $request->input('title');
+       
         $student->latitude = $request->input('latitude');
         $student->longitude = $request->input('longitude');
 

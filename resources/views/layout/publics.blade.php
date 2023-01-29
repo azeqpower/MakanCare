@@ -40,7 +40,9 @@
         </div>
 
     </div>
-  
+    <style> .bg-gradient-primary{
+background-image: url("https://cdn.dribbble.com/users/76620/screenshots/1909179/media/ed9f95dbb7122839c668bea085d4f06f.gif");
+    }</style>
 
     <!-- Bootstrap core JavaScript-->
     <script src="template/vendor/jquery/jquery.min.js"></script>

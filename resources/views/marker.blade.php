@@ -36,15 +36,19 @@
         
             <!-- <p class="card-text">Best Before: {{ $food->best_before }}</p>-->
             
+            @can('isAdmin')
             
+            <a href="{{ url('deletes/'.$food->id) }}" class="btn btn-danger btn-sm">Delete</a>
+            @endcan
             @if(Auth::id() == $food->user_id)
-
+          
              <p>
-                <a href="{{ url('edit/'.$food->id) }}" class="btn btn-primary btn-sm">Edit</a>
+
                 <a href="{{ url('deletes/'.$food->id) }}" class="btn btn-danger btn-sm">Delete</a>
 
         
            </p> 
+      
            @endif
             
         </div>
